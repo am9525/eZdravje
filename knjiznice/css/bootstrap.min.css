@@ -180,7 +180,13 @@
 }
 #ab3 {
     width: 10em;
+    margin-left: 0.5em;
 }
-#ab3 {
+#ab4 {
     width: 12em;
+    margin-left: 0.5em;
+}
+#ehrNapaka {
+    padding-top: 0.5em;   
+    color: red;
 }

@@ -128,7 +128,7 @@ $.ajax({
             xkey: 'date',
             ykeys: ['systolic', 'diastolic'],
             lineColors: ['#FF1A1A', '#1A8CFF'],
-            labels: ['Systolic', 'Diastolic'],
+            labels: ['Sistolični', 'Diastolični'],
             lineWidth: 2,
             pointSize: 3,
             hideHover: true,
@@ -150,6 +150,7 @@ var prikaziSpletno = function(ehrId){
     $(".datumComp").remove();
     $("#spletnaStran").text("...");
     $("#diagnozaInput").text("...");
+     $("#ehrNapaka").text("");
     var podatkiVisine = "";
     var podatkiTeze = "";
     var podatkiKrvi = "";
@@ -157,12 +158,17 @@ var prikaziSpletno = function(ehrId){
     $("#ehrid").text(ehrId);
     pridobiImePriimekDatum(ehrId, function(ime, priimek, datum){
         console.log("prirejam ime");
+        console.log("ime: "+ime);
         $("#ime").text(ime);
         $("#priimek").text(priimek);
         console.log(datum);
         $("#datum").text(datum);
     });
     pridobiVitalnePodatke(ehrId,function(res1,res2,res3,res4,res5){
+        if(res1.length < 3 || res2.length < 3 || res3.length < 3 || res4.length < 3 || res5.length < 3 ){
+            $("#ehrNapaka").text("Z podanim EHR ID-jem ne morem prikazati podatkov")
+            return null;
+        }
         //default vrednosti zadnje
         $("#ehrid2").text(ehrId);
         $("#datuminura").text(res1[0].time);
