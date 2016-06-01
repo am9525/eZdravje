@@ -40,16 +40,19 @@ $(document).ready(function() {
                         $("#seznamUporabnikov").append("<li class=\"oseba\"><a id=\"tretji\" href = \"#\">"+ime+" "+ priimek +"</a></li>");
                         $( "#prvi" ).click(function(event) {
                             event.preventDefault();
+                            
                             prikaziSpletno(ehrId1);
                             console.log("kliknu sin  1 aosebo");
                         });
                         $( "#drugi" ).click(function(event) {
                             event.preventDefault();
+
                             prikaziSpletno(ehrId2);
                             console.log("kliknu sin  2 aosebo");
                         });
                         $( "#tretji" ).click(function(event) {
                             event.preventDefault();
+
                             prikaziSpletno(ehrId3);
                             console.log("kliknu sin  3 aosebo");
                         });
@@ -60,9 +63,93 @@ $(document).ready(function() {
         });
 
     });
+    $("#go").click(function(event) {
+        var ehrId = $("#rocniEHR").val()
+        prikaziSpletno(ehrId);
+        console.log("kliknnu go");
+    });
+    $("#ab4").click(function(event) {
+        window.open($("#spletnaStran").text());
+        console.log("kliknnu spletno");
+    });
+    $("#ab3").click(function(event) {
+        if(parseInt($("#diastolicniKrvniTlak").html()) < 60 || parseInt($("#sistolicniKrvniTlak").html()) < 90){
+            console.log("Hipotenzija |prenizek krvni tlak");
+            $("#spletnaStran").text("http://vizita.si/clanek/zdravozivljenje/hipotenzija-ali-nizek-krvni-tlak.html");
+            $("#diagnozaInput").text("Hipotenzija | prenizek krvni tlak")
+        }
+        else if(parseInt($("#diastolicniKrvniTlak").html()) < 80 || parseInt($("#sistolicniKrvniTlak").html()) < 120){
+            console.log("Optimalni krvni tlak");
+             $("#spletnaStran").text("Zdravi ste ko riba :)");
+            $("#diagnozaInput").text("Hipotenzija | prenizek krvni tlak")
+        }   
+        else if(parseInt($("#diastolicniKrvniTlak").html()) < 85 || parseInt($("#sistolicniKrvniTlak").html()) < 130){
+            console.log("Normalni krvni tlak");
+             $("#spletnaStran").text("Zdravi ste ko riba :)");
+            $("#diagnozaInput").text("Normalni krvni tlak")
+        }   
+        else if((parseInt($("#diastolicniKrvniTlak").html()) >= 90 && parseInt($("#diastolicniKrvniTlak").html()) <= 99) || (parseInt($("#sistolicniKrvniTlak").html()) > 140 && parseInt($("#sistolicniKrvniTlak").html()) <= 159)){
+            console.log("1. stopnja hipertenzije");
+            $("#spletnaStran").text("http://vizita.si/clanek/bolezni/novo-zdravljenje-visokega-krvnega-tlaka-uspesno.html");
+            $("#diagnozaInput").text("1.stopnja hipertenzije | blago zvišanje");
+        }   
+        else if((parseInt($("#diastolicniKrvniTlak").html()) >= 100 && parseInt($("#diastolicniKrvniTlak").html()) <= 109) || (parseInt($("#sistolicniKrvniTlak").html()) > 160 && parseInt($("#sistolicniKrvniTlak").html()) <= 179)){
+            console.log("2. stopnja hipertenzije");
+            $("#spletnaStran").text("http://vizita.si/clanek/bolezni/novo-zdravljenje-visokega-krvnega-tlaka-uspesno.html");
+            $("#diagnozaInput").text("2. stopnja hipertenzije | zmerno zvišanje")
+        }  
+        else if(parseInt($("#sistolicniKrvniTlak").html()) >= 180 || parseInt($("#diastolicniKrvniTlak").html()) >= 110){
+            console.log("3. stopnja hipertenzije");
+            $("#spletnaStran").text("http://vizita.si/clanek/bolezni/novo-zdravljenje-visokega-krvnega-tlaka-uspesno.html");
+            $("#diagnozaInput").text("3. stopnja hipertenzije | hudo zvišanje");
+        }  
+        console.log("kliknnu diagnoza");
+    }); 
 });
+var izrisiGraf = function(ehrId){
+    $("#blood-pressures").html({});
+    var sessionId = getSessionId();
+    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+$.ajax({
+    url: baseUrl + "/view/" + ehrId + "/blood_pressure",
+    type: 'GET',
+    headers: {
+        "Ehr-Session": sessionId
+    },
+    success: function (res) {
+        res.forEach(function (el, i, arr) {
+            var date = new Date(el.time);
+            el.date = date.getTime();
+        });
+
+        new Morris.Area({
+            element: 'blood-pressures',
+            data: res.reverse(),
+            xkey: 'date',
+            ykeys: ['systolic', 'diastolic'],
+            lineColors: ['#FF1A1A', '#1A8CFF'],
+            labels: ['Systolic', 'Diastolic'],
+            lineWidth: 2,
+            pointSize: 3,
+            hideHover: true,
+            behaveLikeLine: true,
+            smooth: false,
+            resize: true,
+            xLabels: "day",
+            xLabelFormat: function (x){
+                var date = new Date(x);
+                return (date.getDate() + '-' + monthNames[date.getMonth()]);
+            },
+
+        });
+    }
+});
+
+}
 var prikaziSpletno = function(ehrId){
     $(".datumComp").remove();
+    $("#spletnaStran").text("...");
+    $("#diagnozaInput").text("...");
     var podatkiVisine = "";
     var podatkiTeze = "";
     var podatkiKrvi = "";
@@ -85,6 +172,7 @@ var prikaziSpletno = function(ehrId){
         $("#sistolicniKrvniTlak").text(res4[0].systolic+" "+res4[0].unit);
         $("#diastolicniKrvniTlak").text(res4[0].diastolic+" "+res4[0].unit);
         $("#nasicenostKrviSKisikom").text(res3[0].spO2);
+        izrisiGraf(ehrId);
         podatkiVisine = res1;
         podatkiTeze = res2;
         podatkiKisika = res3;
@@ -138,6 +226,10 @@ var prikaziSpletno = function(ehrId){
     });
 }
 var pridobiImePriimekDatum = function(ehrId, callback){
+    var sessionId = getSessionId(); 
+	$.ajaxSetup({
+	    headers: {"Ehr-Session": sessionId}
+	});
     $.ajax({
         url: baseUrl + "/demographics/ehr/" + ehrId + "/party",
         type: 'GET',
@@ -148,6 +240,10 @@ var pridobiImePriimekDatum = function(ehrId, callback){
     });
 };
 var pridobiImePriimek = function(ehrId, callback){
+    var sessionId = getSessionId(); 
+	$.ajaxSetup({
+	    headers: {"Ehr-Session": sessionId}
+	});
     $.ajax({
         url: baseUrl + "/demographics/ehr/" + ehrId + "/party",
         type: 'GET',
@@ -158,7 +254,10 @@ var pridobiImePriimek = function(ehrId, callback){
     });
 };
 var pridobiVitalnePodatke = function(ehrId, callback){
-
+    var sessionId = getSessionId(); 
+	$.ajaxSetup({
+	    headers: {"Ehr-Session": sessionId}
+	});
     $.ajax({
         url: baseUrl + "/view/" + ehrId + "/height",
         type: 'GET',

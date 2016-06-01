@@ -1,41 +1,52 @@
-var baseUrl = 'https://rest.ehrscape.com/rest/v1';
-var queryUrl = baseUrl + '/query';
 
-var username = "ois.seminar";
-var password = "ois4fri";
-var ehrId = "a51f2957-bf3c-49a4-8349-faa89fa98f31";
+$(document).ready(function () {
+			//Width and height
+			var w = 500;
+			var h = 100;
+			var barPadding = 1;
+			
+			var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+							11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
+			
+			//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
 
-var authorization = "Basic " + btoa(username + ":" + password)
+			svg.selectAll("rect")
+			   .data(dataset)
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d, i) {
+			   		return i * (w / dataset.length);
+			   })
+			   .attr("y", function(d) {
+			   		return h - (d * 4);
+			   })
+			   .attr("width", w / dataset.length - barPadding)
+			   .attr("height", function(d) {
+			   		return d * 4;
+			   })
+			   .attr("fill", function(d) {
+					return "rgb(0, 0, " + (d * 10) + ")";
+			   });
 
-$.ajaxSetup({
-    headers: {
-        "Authorization": authorization
-    }
-});
-var compositionData = {
-    "ctx/time": "2014-3-19T13:10Z",
-    "ctx/language": "en",
-    "ctx/territory": "SI",
-    "vital_signs/body_temperature/any_event/temperature|magnitude": 37.1,
-    "vital_signs/body_temperature/any_event/temperature|unit": "°C",
-    "vital_signs/blood_pressure/any_event/systolic": 120,
-    "vital_signs/blood_pressure/any_event/diastolic": 90,
-    "vital_signs/height_length/any_event/body_height_length": 189,
-    "vital_signs/body_weight/any_event/body_weight": 70
-};
-var queryParams = {
-    "ehrId": ehrId,
-    templateId: 'Vital Signs',
-    format: 'FLAT',
-    committer: 'Belinda Nurse'
-};
-$.ajax({
-    url: baseUrl + "/composition?" + $.param(queryParams),
-    type: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify(compositionData),
-    success: function (res) {
-        $("#header").html("Store composition");
-        $("#result").html(res.meta.href);
-    }
+			svg.selectAll("text")
+			   .data(dataset)
+			   .enter()
+			   .append("text")
+			   .text(function(d) {
+			   		return d;
+			   })
+			   .attr("text-anchor", "middle")
+			   .attr("x", function(d, i) {
+			   		return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
+			   })
+			   .attr("y", function(d) {
+			   		return h - (d * 4) + 14;
+			   })
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "11px")
+			   .attr("fill", "white");
 });

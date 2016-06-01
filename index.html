@@ -4,12 +4,17 @@
   <meta charset="utf-8">
   <title>eZdravje :: 4. DN :: OIS 2015/2016</title>
   <link href="knjiznice/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
   <style>
     body {padding-top: 70px;}
   </style>
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
   <script src="knjiznice/js/bootstrap.min.js"></script>
+  <script src="knjiznice/js/morris.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <body>
 
@@ -22,7 +27,7 @@
           <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button>
         <!-- ZAČETEK: Ime vaše aplikacije -->
-        <a class="navbar-brand" href="index.html">PatientInfo</a>
+        <a class="navbar-brand" href="index.html">BloodInfo</a>
         <!-- KONEC: Ime vaše aplikacije -->
       </div>
       <div class="collapse navbar-collapse" id="menujska-vrstica">
@@ -51,9 +56,9 @@
       					<div class="panel-body"> <!-- search box -->
                         <div id="imaginary_container"> 
                             <div class="input-group stylish-input-group">
-                                <input type="text" class="form-control"  placeholder="EHR ID" >
+                                <input id="rocniEHR"type="text" class="form-control"  placeholder="EHR ID" >
                                 <span class="input-group-addon">
-                                    <button type="submit">
+                                    <button id="go" type="button">
                                         GO
                                     </button>  
                                 </span>
@@ -100,8 +105,17 @@
 						<span class="label label-primary">EHR ID:</span><h4 id="ehrid" class = "izpis">...</h4>
 				  	</div>
 				</div>
+		</div>
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="panel panel-default">
+					<div id = "naslov" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Vizualizacija</b> krvnega pritiska</div>
+						</div>
+					</div>
+					<div id="blood-pressures" style="width: 100%; height: 220px;"></div>
+				</div>
 			</div>
-
 		</div>
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6">
@@ -132,11 +146,34 @@
 						<span class="label label-primary">Sistolični krvni tlak</span><h4 id="sistolicniKrvniTlak" class = "izpis">...</h4>
 						<span class="label label-primary">Diastolični krvni tlak</span><h4 id="diastolicniKrvniTlak" class = "izpis">...</h4>
 						<span class="label label-primary">Nasičenost krvi s kisikom</span><h4 id="nasicenostKrviSKisikom" class = "izpis">...</h4>
-						<span class="label label-primary">Merilec</span><h4 id="merilec"class = "izpis">...</h4>
+						
 				  	</div>
 				</div>
 			</div>
-
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="panel panel-default">
+					<div id = "naslov" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Postavljena diagnoza</b> glede na izmejen krvni pritisk</div>
+							<button type="button" id ="ab3" class="btn btn-primary">Postavi diagnozo</button>
+						</div>
+					</div>
+					<div id="diagnoza" class="panel-body">
+					  <h4 id="diagnozaInput" class = "izpis">...</h4>
+				  	</div>
+				</div>
+				<div class="panel panel-default">
+					<div id = "naslov" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Spletna stran z napotki</b> o zdravljenju bolezni</div>
+							<button type="button" id ="ab4" class="btn btn-primary">Obiščite spletno stran</button>
+						</div>
+					</div>
+					<div id="spletna" class="panel-body">
+					  <h4 id="spletnaStran" class = "izpis">...</h4>
+				  	</div>
+				</div>
+			</div>
 		</div>
   </div>
 

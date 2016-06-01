@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8">
+      var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+                11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
+
+d3.select("body").selectAll("div")
+    .data(dataset)
+    .enter()
+    .append("div")
+    .attr("class", "bar")
+    .style("height", function(d) {
+        var barHeight = d * 5;
+        return barHeight + "px";
+    });
+     </script>
+   </head>
+   <body>
+     <p>Hello!</p>
+   </body>
+ </html>
