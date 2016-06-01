@@ -38,14 +38,108 @@
 
   <!-- ZAČETEK: Vsebina aplikacije -->
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <ul id="seznamUporabnikov">
-        </ul>
-        
-      </div>
-    </div>
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6">
+      				<div  class="panel panel-default">
+      					<div id = "naslov" class="panel-heading">
+      						<div class="row">
+      							<div class="col-lg-8 col-md-8 col-sm-8">
+      							  <b>Vpišite EHR ID </b>iskanega bolnika
+      							  </div>
+      						</div>
+      					</div>
+      					<div class="panel-body"> <!-- search box -->
+                        <div id="imaginary_container"> 
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control"  placeholder="EHR ID" >
+                                <span class="input-group-addon">
+                                    <button type="submit">
+                                        GO
+                                    </button>  
+                                </span>
+                            </div>
+                        </div>
+      				  	</div><!-- search box  end -->
+      				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="panel panel-default">
+					<div id = "naslov" class="panel-heading">
+						<div class="row">
+							<div  class="col-lg-8 col-md-8 col-sm-8"><b>Izberite Ime in priimek </b> želene osebe</div>
+							
+						</div>
+					</div>
+					<div class="panel-body">
+  				<div id="dd" class="btn-group">
+                      <button type="button" id ="ab" class="btn btn-primary">Seznam Oseb</button>
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul id="seznamUporabnikov" class="dropdown-menu">
+  
+                      </ul>
+                    </div>
+				  	</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="panel panel-default">
+					<div id = "naslov" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>EHR zapis</b> izbranega bolnika</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<span class="label label-primary">Ime</span><h4 id="ime" class = "izpis">...</h4>
+						<span class="label label-primary">Priimek</span><h4 id="priimek" class = "izpis">...</h4>
+						<span class="label label-primary">Datum rojstva</span><h4 id="datum" class = "izpis">...</h4>
+						<span class="label label-primary">EHR ID:</span><h4 id="ehrid" class = "izpis">...</h4>
+				  	</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="panel panel-default">
+					<div id = "naslov" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6"><b>Prikaz</b> meritve <b>vitalnih znakov</b> bolnika</div>
+							<div class="col-lg-6 col-md-6 col-sm-6">
+  				<div class="btn-group">
+                      <button type="button" id ="ab2" class="btn btn-primary">Datumi</button>
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul id="seznamDatumov" class="dropdown-menu">
+  
+                      </ul>
+                    </div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body">
+						<span class="label label-primary">EHR ID</span><h4 id="ehrid2"class = "izpis">...</h4>
+						<span class="label label-primary">Datum in ura</span><h4 id="datuminura" class = "izpis">...</h4>
+						<span class="label label-primary">Telesna višina</span><h4 id="telesnaVisina" class = "izpis">...</h4>
+						<span class="label label-primary">Telesna teža</span><h4 id="telesnaTeza" class = "izpis">...</h4>
+						<span class="label label-primary">Telesna temperatura</span><h4 id="telesnaTemperatura" class = "izpis">...</h4>
+						<span class="label label-primary">Sistolični krvni tlak</span><h4 id="sistolicniKrvniTlak" class = "izpis">...</h4>
+						<span class="label label-primary">Diastolični krvni tlak</span><h4 id="diastolicniKrvniTlak" class = "izpis">...</h4>
+						<span class="label label-primary">Nasičenost krvi s kisikom</span><h4 id="nasicenostKrviSKisikom" class = "izpis">...</h4>
+						<span class="label label-primary">Merilec</span><h4 id="merilec"class = "izpis">...</h4>
+				  	</div>
+				</div>
+			</div>
+
+		</div>
   </div>
+
   <!-- KONEC: Vsebina aplikacije -->
 
 </body>
