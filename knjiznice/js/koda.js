@@ -80,12 +80,12 @@ $(document).ready(function() {
         }
         else if(parseInt($("#diastolicniKrvniTlak").html()) < 80 || parseInt($("#sistolicniKrvniTlak").html()) < 120){
             console.log("Optimalni krvni tlak");
-             $("#spletnaStran").text("Zdravi ste ko riba :)");
-            $("#diagnozaInput").text("Hipotenzija | prenizek krvni tlak")
+             $("#spletnaStran").text("Zdravi ste kot riba :)");
+            $("#diagnozaInput").text("Optimalni krvni tlak")
         }   
         else if(parseInt($("#diastolicniKrvniTlak").html()) < 85 || parseInt($("#sistolicniKrvniTlak").html()) < 130){
             console.log("Normalni krvni tlak");
-             $("#spletnaStran").text("Zdravi ste ko riba :)");
+             $("#spletnaStran").text("Zdravi ste kot riba :)");
             $("#diagnozaInput").text("Normalni krvni tlak")
         }   
         else if((parseInt($("#diastolicniKrvniTlak").html()) >= 90 && parseInt($("#diastolicniKrvniTlak").html()) <= 99) || (parseInt($("#sistolicniKrvniTlak").html()) > 140 && parseInt($("#sistolicniKrvniTlak").html()) <= 159)){
