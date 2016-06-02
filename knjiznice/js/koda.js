@@ -212,7 +212,7 @@ var prikaziSpletno = function(ehrId){
     var podatkiTeze = "";
     var podatkiKrvi = "";
     var podatkiKisika = "";
-    $("#ehrid").text(ehrId);
+    
     pridobiImePriimekDatum(ehrId, function(ime, priimek, datum){
         console.log("prirejam ime");
         console.log("ime: "+ime);
@@ -226,6 +226,7 @@ var prikaziSpletno = function(ehrId){
             $("#ehrNapaka").text("Z podanim EHR ID-jem ne morem prikazati podatkov")
             return null;
         }
+        $("#ehrid").text(ehrId);
         //default vrednosti zadnje
         $("#ehrid2").text(ehrId);
         $("#datuminura").text(res1[0].time);
