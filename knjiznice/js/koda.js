@@ -105,7 +105,64 @@ $(document).ready(function() {
         }  
         console.log("kliknnu diagnoza");
     }); 
+
 });
+function initMap() {
+ getLocation(function(lat, lng){
+        var mapDiv = document.getElementById('gMaps');
+        var map = new google.maps.Map(mapDiv, {
+            center: {lat: lat, lng: lng},
+            zoom: 13
+        });
+        pyrmont = {lat: lat, lng: lng};
+          infowindow = new google.maps.InfoWindow();
+          var service = new google.maps.places.PlacesService(map);
+          service.nearbySearch({
+            location: pyrmont,
+            radius: 500,
+            type: ['store']
+          }, callback);
+        
+        
+            function callback(results, status) {
+              if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                  createMarker(results[i]);
+                }
+              }
+            }
+            function createMarker(place) {
+              var placeLoc = place.geometry.location;
+              var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+              });
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(place.name);
+                    infowindow.open(map, this);
+                });
+            }
+
+    });
+
+
+}
+
+var getLocation = function(callback) {
+    var lat = 0;
+    var lon = 0;
+    if (navigator.geolocation) {
+        
+        navigator.geolocation.getCurrentPosition(function(position){
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
+            callback(lat, lon);
+        });
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    
+}
 var izrisiGraf = function(ehrId){
     $("#blood-pressures").html({});
     var sessionId = getSessionId();

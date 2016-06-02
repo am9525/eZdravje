@@ -190,3 +190,11 @@
     padding-top: 0.5em;   
     color: red;
 }
+#gMaps {
+    width: 500px;
+    height: 400px;
+    background-color: #CCC;
+    margin-left: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}

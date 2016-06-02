@@ -13,6 +13,7 @@
   <script src="knjiznice/js/raphael-min.js"></script>
   <script src="knjiznice/js/morris.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
+  
   <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </head>
 <body>
@@ -173,11 +174,21 @@
 					  <h4 id="spletnaStran" class = "izpis">...</h4>
 				  	</div>
 				</div>
+			<div class="panel panel-default">
+					<div id = "naslov" class="panel-heading">
+						<div class="row">
+							<div class="col-lg-8 col-md-8 col-sm-8"><b>Lokacija</b> najbližje ordinacije/bolnišnice</div>
+						</div>
+					</div>
+					<div id="gMaps" class="panel-body">
+						
+				  	</div>
+				</div>
 			</div>
 		</div>
   </div>
 
   <!-- KONEC: Vsebina aplikacije -->
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9xdHJmIdCScYhHneoOlsmxFG3ZCDXEMc&callback=initMap&libraries=places" async defer></script>
 </body>
 </html>
