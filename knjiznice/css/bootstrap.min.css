@@ -191,10 +191,14 @@
     color: red;
 }
 #gMaps {
-    width: 400px;
-    height: 300px;
+    width: 500px;
+    height: 400px;
     background-color: #CCC;
     margin-left: 2em;
     margin-top: 2em;
     margin-bottom: 2em;
+}
+#diagrami {
+    max-width:80%;
+    max-height:80%;
 }

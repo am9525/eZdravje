@@ -112,15 +112,15 @@ function initMap() {
         var mapDiv = document.getElementById('gMaps');
         var map = new google.maps.Map(mapDiv, {
             center: {lat: lat, lng: lng},
-            zoom: 13
+            zoom: 12
         });
         pyrmont = {lat: lat, lng: lng};
           infowindow = new google.maps.InfoWindow();
           var service = new google.maps.places.PlacesService(map);
           service.nearbySearch({
             location: pyrmont,
-            radius: 500,
-            type: ['store']
+            radius: 2000,
+            type: ['hospital']
           }, callback);
         
         

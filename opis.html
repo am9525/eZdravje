@@ -47,9 +47,15 @@
             <!-- ZAČETEK: Opis ideje, ki jo aplikacija podpira -->
             <p>Osnovna ideja za aplikacijo bo podobna demotu PHR(Patient Health Record), ki je na voljo
             na <a href="https://www.ehrscape.com/phr.html" target="_blank">strani</a>. Omogočalo bo prikaz trenutnega
-            zdravstnega stanja pacienta, ter podajala statistične podatke o bolezni (npr. koliko ljudi na svetu ima to bolezen)
-            . Aplikacija je predvsem namenjena pacientom ter zdravstvenim delavcem za 
-            hiter vpoled v zdravstveno stanje pacienta.</p><p class="text-muted">Opis naj ne bo daljši od 200 besed.</p>
+            oziroma preteklega stanja pacienta z pomočjo grafa, kjer lažje razvidno kako napreduje/se slabša zdravje pacienta
+            , ter bo na podalagi teh podatkov posatvilo diagnozo o krvnem tlaku pacienta, 
+            ter mu bo ponudila članke iz vira <a href="http://vizita.si/" target="_blank">Vizita.si</a> 
+            . Aplikacija je predvsem namenjena krvnim bolnikom, natančneje bolnikom, ki imajo težave s krvnim tlakom. 
+            Seveda pa so na voljo tudi drugi podatki kot so višina, teža in temperature, ki lahko pacientu pomagajo
+            postaviti lastno oziroma predčasno diagnozo (pred dejasnko zdravniško diagnozo). V primeru hujših težav 
+            pa je v aplikaciji tudi prikazan zemljevid s pomočjo katerega si lahko pacient pomaga poiskati najbližjo 
+            bolnišnico/oziroma zdravstveno ordinacijo.
+            </p><p class="text-muted">Opis naj ne bo daljši od 200 besed.</p>
             <!-- KONEC: Opis ideje, ki jo aplikacija podpira -->
           </div>
         </div>
@@ -59,9 +65,10 @@
           </div>
           <div class="panel-body">
             <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
-            <p>URL naslov: <a href="http://apps.who.int/gho/data/node.home" target="_blank">http://apps.who.int/gho/data/node.home</a></p>
-            <p>Namen uporabe: Prikazovanje statističnih podatkov o raznih boleznih</p>
-            <p>Način implementacije: API</p>
+            <p>URL naslov: <a href="https://developers.google.com/maps/" target="_blank">https://developers.google.com/maps/</a>, 
+            <a href="https://www.vizita.si" target="_blank">www.vizita.si</a></p>
+            <p>Namen uporabe:Prikzaovnje lokacije najbližje bolnišnice/zdravstvene odrinacije, prikazi strani z napotaki o zdravljenju</p>
+            <p>Način implementacije: API, prikaz spletne strani </p>
             <!-- KONEC: Uporabljeni zunanji viri podatkov -->
           </div>
         </div>
@@ -81,7 +88,7 @@
           </div>
           <div class="panel-body">
             <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
-            <p><strong>TO-DO</strong>: Na tem mestu je potrebno navesti uporabljeno tehniko vizualizacije podatkov (za pomoč lahko uporabite primer iz <a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3.js galerije</a>) in zakaj je bila ta tehnika izbrana.</p>
+            <p>Vizualizacija podatkov je bila implemenitrana s pomočjo knjižnice <a href="http://morrisjs.github.io/morris.js/" target="_blank">morris.js</a></p>
             <!-- KONEC: Uporabljeni zunanji viri podatkov -->
           </div>
         </div>
